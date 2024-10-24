@@ -11,7 +11,7 @@ The application provides the following key functionalities:
 - **Purchase Tracking**: Record and track customer purchases.
 - **Admin Users**: Admin users can manage resources and view reports of product purchases.
 - **JWT Authentication**: Secure access to APIs using JSON Web Tokens (JWT).
-- **Daily Reports**: Automatic daily reports for sales are generated using background jobs with Sidekiq.
+- **Daily Reports**: Automatic daily reports for sales are generated using background jobs with Resque.
 
 ## Prerequisites
 
@@ -30,12 +30,15 @@ First, clone this repository and navigate to the project directory:
 ```bash
 git clone
 cd puntospoint-ecommerce
+```
 
 ### 2. Build the Docker Image
 
 Run the following command to build the Docker image:
 
+```bash
 docker build -t puntospoint_ecommerce .
+```
 
 This command will create an image named puntospoint_ecommerce with all necessary dependencies, including Ruby, PostgreSQL, and Redis.
 
@@ -43,7 +46,9 @@ This command will create an image named puntospoint_ecommerce with all necessary
 
 Start the container by running:
 
+```bash
 docker run -p 3000:3000 -p 5432:5432 -p 6379:6379 puntospoint_ecommerce
+```
 
 When the container starts, it will automatically:
 
