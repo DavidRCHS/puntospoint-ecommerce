@@ -43,4 +43,5 @@ RUN bundle install
 COPY . $APP_HOME
 
 # Ejecutar Redis y PostgreSQL, luego ejecutar los seeds
-CMD service postgresql start
+CMD service postgresql start && \
+    rails server -b 0.0.0.0
