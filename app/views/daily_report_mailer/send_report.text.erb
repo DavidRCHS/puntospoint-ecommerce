@@ -1,0 +1,9 @@
+Reporte de Compras del Día Anterior
+-----------------------------------
+<% @purchases.each do |purchase| %>
+Producto: <%= purchase.product.name %>
+Cantidad: <%= purchase.quantity %>
+Cliente: <%= purchase.customer.name %>
+Precio Total: $<%= purchase.total_price %>
+-----------------------------------
+<% end %>
