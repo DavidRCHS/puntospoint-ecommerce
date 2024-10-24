@@ -44,4 +44,5 @@ COPY . $APP_HOME
 
 # Ejecutar Redis y PostgreSQL, luego ejecutar los seeds
 CMD service postgresql start && \
+    redis-server & \
     rails server -b 0.0.0.0
