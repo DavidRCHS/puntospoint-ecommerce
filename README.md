@@ -61,12 +61,18 @@ When the container starts, it will automatically
 - This means that most of the setup and configuration, including database seeding, is handled automatically. You can access the application directly at http://localhost:3000/.
 Once the container is running, open a new terminal and execute the following commands to run the database migrations and seed the initial data:
 
-### 4.Run database migrations:
+### 4. Start Redis
+Redis must be started manually in a separate terminal. To start Redis, run the following command:
+
+```bash
+redis-server
+```
+### 5. Run database migrations:
 Once the container is running, open a new terminal and execute the following commands inside the running container:
 ```bash
 rake db:migrate
 ```
-### 5.Seed the initial data:
+### 6. Seed the initial data:
 Once the database migrations have been executed, you need to seed the initial data. This step populates the database with essential sample data such as admin users, products, categories, and other records necessary for testing and demonstrating the application’s functionality.
 
 ```bash
