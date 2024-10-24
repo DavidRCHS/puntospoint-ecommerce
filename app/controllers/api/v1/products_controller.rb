@@ -19,19 +19,28 @@ class Api::V1::ProductsController < ApplicationController
 
   # PUT /api/v1/products/:id
   def update
-    product = Product.find_by(id: params[:id])
+    # Get the product
+    product = Product.where(id: params['id']).first
 
     if product
-      # Establish the current admin as the responsible for the change
-      PaperTrail.request.whodunnit = current_admin.id.to_s
+      # Get the admin from the token
+      admin = current_admin_from_token
+      if admin
+        # Set the controller info for PaperTrail
+        PaperTrail.whodunnit = admin.id.to_s
 
-      if product.update(product_params)
-        render json: product
+        # Update the product
+        if params['description'].present?
+          product.update_attribute(:description, params['description'])
+          render json: product
+        else
+          render json: { 'error' => 'No description provided' }, status: :unprocessable_entity
+        end
       else
-        render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
+        render json: { 'error' => 'Invalid admin token' }, status: :unauthorized
       end
     else
-      render json: { error: 'Product not found' }, status: :not_found
+      render json: { 'error' => 'Product not found' }, status: :not_found
     end
   end
 
@@ -44,6 +53,7 @@ class Api::V1::ProductsController < ApplicationController
     render json: results
   end
 
+  # GET /api/v1/products/top_revenue
   def top_revenue
     results = Category.joins(products: :purchases)
                       .select('categories.name AS category_name, products.name AS product_name, SUM(purchases.total_price) AS total_revenue')
@@ -69,6 +79,6 @@ class Api::V1::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price)
+    params.require('product').permit('name', 'description', 'price')
   end
 end

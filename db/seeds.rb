@@ -21,10 +21,22 @@ admin_names.each_with_index do |name, index|
 end
 
 # Create categories
-categories = ['Electronics', 'Clothing', 'Books', 'Toys', 'Home', 'Sports', 'Garden', 'Automotive', 'Beauty', 'Health']
+categories = [
+  { name: 'Electronics', admin_id: 1 },
+  { name: 'Clothing', admin_id: 5 },
+  { name: 'Books', admin_id: 3 },
+  { name: 'Toys', admin_id: 2 },
+  { name: 'Home', admin_id: 3 },
+  { name: 'Sports', admin_id: 1 },
+  { name: 'Garden', admin_id: 4 },
+  { name: 'Automotive', admin_id: 4 },
+  { name: 'Beauty', admin_id: 2 },
+  { name: 'Health', admin_id: 5 }
+]
+
 categories.each do |category|
-  Category.where(name: category, admin_id: Admin.first.id).first ||
-    Category.create!(name: category, admin_id: Admin.first.id)
+  Category.where(name: category[:name]).first ||
+    Category.create!(name: category[:name], admin_id: category[:admin_id])
 end
 
 # Create products

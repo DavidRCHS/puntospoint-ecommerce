@@ -21,6 +21,10 @@ class Api::V1::AuthController < ApplicationController
   private
 
   def jwt_encode(payload)
+    # Set expiration time to 10 minutes from now
+    expiration_time = 10.minutes.from_now.to_i
+    payload[:exp] = expiration_time
+
     secret_key = 'my_secret_key'
     JWT.encode(payload, secret_key)
   end

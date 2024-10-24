@@ -2,7 +2,10 @@ require 'spec_helper'
 
 RSpec.describe 'Auth API', type: :request do
   describe 'POST /api/v1/auth/login' do
-    let!(:admin) { Admin.create(email: 'alice@example.com', password_digest: Digest::SHA256.hexdigest('password')) }
+    let!(:admin) do
+      Admin.create(email: 'alice@example.com',
+        password_digest: Digest::SHA256.hexdigest('password'))
+    end
 
     it 'returns a JWT token with valid credentials' do
       post '/api/v1/auth/login',

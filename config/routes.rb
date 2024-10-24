@@ -17,6 +17,8 @@ PuntospointEcommerce::Application.routes.draw do
       end
 
       resources :versions, only: [:index]
+
+      resources :categories, only: [:index]
     end
   end
 end
