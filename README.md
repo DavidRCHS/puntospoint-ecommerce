@@ -1,6 +1,6 @@
 # PuntosPoint E-commerce
 
-This project is a backend application designed for managing an e-commerce platform. It is built with Ruby on Rails 3.0 and uses PostgreSQL as the [Database](#database-structure).
+This project is a backend application designed for managing an e-commerce platform. It is built with Ruby 1.9.3 and Rails 3.0 and uses PostgreSQL as the [Database](#database-structure).
 
 ## Table of Contents
 - [Overview](#overview)
