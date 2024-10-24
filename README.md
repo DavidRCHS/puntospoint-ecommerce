@@ -51,7 +51,7 @@ This command will create an image named puntospoint_ecommerce with all necessary
 Start the container by running:
 
 ```bash
-docker run -p 3000:3000 -p 5432:5432 puntospoint_ecommerce
+docker run -d -p 3000:3000 -p 5432:5432 -p 6379:6379 puntospoint_ecommerce
 ```
 
 When the container starts, it will automatically
